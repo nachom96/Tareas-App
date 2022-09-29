@@ -99,6 +99,9 @@ class CategoriesController extends Controller
     public function destroy($category)
     {
         $category = Category::find($category);
+        $category->todos()->each(function($todo){
+            $todo->delete();
+        });
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Categoría eliminada!');

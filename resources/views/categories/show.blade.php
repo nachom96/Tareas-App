@@ -15,7 +15,7 @@
             @enderror
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre de la categoría</label>
-                <input type="text" name="name" class="form-control" aria-describedby="emailHelp">
+                <input type="text" name="name" class="form-control" value="{{$category->name}}">
             </div>
             <div class="mb-3">
                 <label for="color" class="form-label">Color de la categoría</label>
@@ -25,6 +25,7 @@
         </form>
         <div>
             @if ($category->todos->count() > 0)
+            @foreach ($category->todos as $todo)
             <div class="row py-1">
                 <div class="col-md-9 d-flex align-items-center">
                     <a href="{{ route('todos-edit', ['id' => $todo->id]) }}"> {$todo->title}}</a>
@@ -38,6 +39,8 @@
                     </form>
                 </div>
             </div>
+            @endforeach
+            
             @else
 
                 No hay tareas para esta categoría
